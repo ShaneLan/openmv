@@ -20,11 +20,11 @@ extern const gpio_t gpio_pins[];
 #ifdef OPENMV1
 /* LEDs */
 #define LED_PORT                (GPIOD)
-#define LED_RED_PIN             (GPIO_PIN_4)
-#define LED_GREEN_PIN           (GPIO_PIN_6)
-#define LED_BLUE_PIN            (GPIO_PIN_5)
-#define LED_ON(gpio)            (gpio.port->BSRRH = gpio.pin)
-#define LED_OFF(gpio)           (gpio.port->BSRRL = gpio.pin)
+#define LED_RED_PIN             (GPIO_PIN_14)
+#define LED_GREEN_PIN           (GPIO_PIN_12)
+#define LED_BLUE_PIN            (GPIO_PIN_15)
+#define LED_ON(gpio)            (gpio.port->BSRRL = gpio.pin)
+#define LED_OFF(gpio)           (gpio.port->BSRRH = gpio.pin)
 
 /* GPIOs */
 typedef enum {
@@ -101,7 +101,7 @@ typedef enum {
 #define DCMI_D3_PIN             (GPIO_PIN_1)
 #define DCMI_D4_PIN             (GPIO_PIN_4)
 #define DCMI_D5_PIN             (GPIO_PIN_5)
-#define DCMI_D6_PIN             (GPIO_PIN_6)
+#define DCMI_D6_PIN             (GPIO_PIN_5)
 #define DCMI_D7_PIN             (GPIO_PIN_6)
 
 #define DCMI_D0_PORT            (GPIOC)
@@ -109,9 +109,9 @@ typedef enum {
 #define DCMI_D2_PORT            (GPIOE)
 #define DCMI_D3_PORT            (GPIOE)
 #define DCMI_D4_PORT            (GPIOE)
-#define DCMI_D5_PORT            (GPIOE)
+#define DCMI_D5_PORT            (GPIOB)
 #define DCMI_D6_PORT            (GPIOE)
-#define DCMI_D7_PORT            (GPIOB)
+#define DCMI_D7_PORT            (GPIOE)
 
 #define DCMI_HSYNC_PIN          (GPIO_PIN_7)
 #define DCMI_VSYNC_PIN          (GPIO_PIN_4)
