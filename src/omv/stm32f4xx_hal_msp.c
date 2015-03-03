@@ -34,6 +34,7 @@ const gpio_t gpio_pins[] = {
 const gpio_t gpio_pins[] = {
     {GPIOA, GPIO_PIN_2 },
     {GPIOA, GPIO_PIN_3 },
+    {GPIOC, GPIO_PIN_2 },
     {GPIOC, GPIO_PIN_4 },
     {GPIOC, GPIO_PIN_5 },
     {GPIOD, GPIO_PIN_8 },
@@ -345,7 +346,7 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram)
     GPIO_Init_Structure.Alternate   = GPIO_AF12_FMC;
 
     /* GPIOC configuration */
-    GPIO_Init_Structure.Pin = GPIO_PIN_0 | GPIO_PIN_2 | GPIO_PIN_3;
+    GPIO_Init_Structure.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_3;
     HAL_GPIO_Init(GPIOC, &GPIO_Init_Structure);
 
     /* GPIOD configuration */

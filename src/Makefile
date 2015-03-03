@@ -115,7 +115,6 @@ OBJ += $(addprefix $(BUILD)/$(OMV_DIR)/,    \
 	)
 else
 OBJ += $(addprefix $(BUILD)/$(OMV_DIR)/,    \
-	sdram.o                                 \
 	sdcard_sdio.o                           \
 	)
 endif

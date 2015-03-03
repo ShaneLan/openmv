@@ -1,9 +1,46 @@
 import spi, gpio
 from time import sleep
 
-rst = gpio.GPIO(gpio.PA1)
-rs  = gpio.GPIO(gpio.PA2)
-cs  = gpio.GPIO(gpio.PA7)
+ # define some screen commands
+
+
+ILI9341_RESET = 0x01
+ILI9341_SLEEP_OUT= 0x11
+ILI9341_GAMMA = 0x26
+ILI9341_DISPLAY_OFF=	0x28
+ILI9341_DISPLAY_ON =	0x29
+ILI9341_COLUMN_ADDR =	0x2A
+ILI9341_PAGE_ADDR = 	0x2B
+ILI9341_GRAM =	0x2C
+ILI9341_MAC =	0x36
+ILI9341_PIXEL_FORMAT =	0x3A
+ILI9341_WDB =	0x51
+ILI9341_WCD =	0x53
+ILI9341_RGB_INTERFACE =	0xB0
+ILI9341_FRC =	0xB1
+ILI9341_BPC =	0xB5
+ILI9341_DFC =	0xB6
+ILI9341_POWER1 =	0xC0
+ILI9341_POWER2	= 0xC1
+ILI9341_VCOM1 =	0xC5
+ILI9341_VCOM2 =	0xC7
+ILI9341_POWERA =	0xCB
+ILI9341_POWERB	= 0xCF
+ILI9341_PGAMMA	= 0xE0
+ILI9341_NGAMMA	= 0xE1
+ILI9341_DTCA	= 0xE8
+ILI9341_DTCB =	0xEA
+ILI9341_POWER_SEQ =	0xED
+ILI9341_3GAMMA_EN =	0xF2
+ILI9341_INTERFACE =	0xF6
+ILI9341_PRC =	0xF7
+
+
+
+
+rst = gpio.GPIO(gpio.PD12)
+rs  = gpio.GPIO(gpio.PD13)
+cs  = gpio.GPIO(gpio.PC2)
 
 def reset():
     rst.low()
@@ -37,128 +74,104 @@ def write_image(image):
     cs.high()
 
 def init():
-    #HW reset
-    reset()
+	#HW reset
+	write_command(0x01) #reset LCD
+	sleep (120)
+	#LCD init sequence
+	write_command(0xC1) #PowerA
+	write_data(0x39)
+	write_data(0x2C)
+	write_data(0x00)
+	write_data(0x34)
+	write_data(0x02)
+	write_command(ILI9341_POWERB)
+	write_data(0x00)
+	write_data(0xC1)
+	write_data(0x30)
+	write_command(ILI9341_DTCA)
+	write_data(0x85)
+	write_data(0x00)
+	write_data(0x78)
+	write_command(ILI9341_DTCB)
+	write_data(0x00)
+	write_data(0x00)
+	write_command(ILI9341_POWER_SEQ)
+	write_data(0x64)
+	write_data(0x03)
+	write_data(0x12)
+	write_data(0x81)
+	write_command(ILI9341_PRC)
+	write_data(0x20)
+	write_command(ILI9341_POWER1)
+	write_data(0x23)
+	write_command(ILI9341_POWER2)
+	write_data(0x10)
+	write_command(ILI9341_VCOM1)
+	write_data(0x3E)
+	write_data(0x28)
+	write_command(ILI9341_VCOM2)
+	write_data(0x86)
+	write_command(ILI9341_MAC)
+	write_data(0x48)
+	write_command(ILI9341_PIXEL_FORMAT)
+	write_data(0x55)
+	write_command(ILI9341_FRC)
+	write_data(0x00)
+	write_data(0x18)
+	write_command(ILI9341_DFC)
+	write_data(0x08)
+	write_data(0x82)
+	write_data(0x27)
+	write_command(ILI9341_3GAMMA_EN)
+	write_data(0x00)
+	write_command(ILI9341_COLUMN_ADDR)
+	write_data(0x00)
+	write_data(0x00)
+	write_data(0x00)
+	write_data(0xEF)
+	write_command(ILI9341_PAGE_ADDR)
+	write_data(0x00)
+	write_data(0x00)
+	write_data(0x01)
+	write_data(0x3F)
+	write_command(ILI9341_GAMMA)
+	write_data(0x01)
+	write_command(ILI9341_PGAMMA)
+	write_data(0x0F)
+	write_data(0x31)
+	write_data(0x2B)
+	write_data(0x0C)
+	write_data(0x0E)
+	write_data(0x08)
+	write_data(0x4E)
+	write_data(0xF1)
+	write_data(0x37)
+	write_data(0x07)
+	write_data(0x10)
+	write_data(0x03)
+	write_data(0x0E)
+	write_data(0x09)
+	write_data(0x00)
+	write_command(ILI9341_NGAMMA)
+	write_data(0x00)
+	write_data(0x0E)
+	write_data(0x14)
+	write_data(0x03)
+	write_data(0x11)
+	write_data(0x07)
+	write_data(0x31)
+	write_data(0xC1)
+	write_data(0x48)
+	write_data(0x08)
+	write_data(0x0F)
+	write_data(0x0C)
+	write_data(0x31)
+	write_data(0x36)
+	write_data(0x0F)
+	write_command(ILI9341_SLEEP_OUT)
 
-    #LCD init sequence
-    #Sleep exit
-    write_command(0x11)
-    sleep (120)
+	sleep(100)
 
-    #ST7735R Frame Rate
-    write_command(0xB1)
-    write_data(0x01)
-    write_data(0x2C)
-    write_data(0x2D)
-
-    write_command(0xB2)
-    write_data(0x01)
-    write_data(0x2C)
-    write_data(0x2D)
-
-    write_command(0xB3)
-    write_data(0x01)
-    write_data(0x2C)
-    write_data(0x2D)
-    write_data(0x01)
-    write_data(0x2C)
-    write_data(0x2D)
-
-    write_command(0xB4)
-    #Column inversion
-    write_data(0x07)
-
-    #ST7735R Power Sequence
-    write_command(0xC0)
-    write_data(0xA2)
-    write_data(0x02)
-    write_data(0x84)
-
-    write_command(0xC1)
-    write_data(0xC5)
-    write_command(0xC2)
-    write_data(0x0A)
-    write_data(0x00)
-
-    write_command(0xC3)
-    write_data(0x8A)
-    write_data(0x2A)
-
-    write_command(0xC4)
-    write_data(0x8A)
-    write_data(0xEE)
-
-    #VCOM
-    write_command(0xC5)
-    write_data(0x0E)
-
-    #MX, MY, MV, RGB mode
-    write_command(0x36)
-    write_data(0x60)
-
-    #ST7735R Gamma Sequence
-    write_command(0xe0)
-    write_data(0x0f)
-    write_data(0x1a)
-    write_data(0x0f)
-    write_data(0x18)
-    write_data(0x2f)
-    write_data(0x28)
-    write_data(0x20)
-    write_data(0x22)
-    write_data(0x1f)
-    write_data(0x1b)
-    write_data(0x23)
-    write_data(0x37)
-    write_data(0x00)
-    write_data(0x07)
-    write_data(0x02)
-    write_data(0x10)
-
-    write_command(0xe1)
-    write_data(0x0f)
-    write_data(0x1b)
-    write_data(0x0f)
-    write_data(0x17)
-    write_data(0x33)
-    write_data(0x2c)
-    write_data(0x29)
-    write_data(0x2e)
-    write_data(0x30)
-    write_data(0x30)
-    write_data(0x39)
-    write_data(0x3f)
-    write_data(0x00)
-    write_data(0x07)
-    write_data(0x03)
-    write_data(0x10)
-
-    # set column address
-    write_command(0x2a)
-    write_data(0x00)
-    write_data(0x00)
-    write_data(0x00)
-    write_data(0x9F)
-
-    # set row address
-    write_command(0x2b)
-    write_data(0x00)
-    write_data(0x00)
-    write_data(0x00)
-    write_data(0x77)
-
-    #Enable test command
-    write_command(0xF0)
-    write_data(0x01)
-
-    #Disable ram power save mode
-    write_command(0xF6)
-    write_data(0x00)
-
-    #65k mode
-    write_command(0x3A)
-    write_data(0x05)
-
-    #Display on
-    write_command(0x29)
-
+	write_command(ILI9341_DISPLAY_ON)
+	write_command(ILI9341_GRAM)
+    

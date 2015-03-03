@@ -191,6 +191,7 @@ typedef enum {
 typedef enum {
     GPIO_PA2,
     GPIO_PA3,
+    GPIO_PC2,
     GPIO_PC4,
     GPIO_PC5,
     GPIO_PD8,
@@ -205,6 +206,7 @@ typedef enum {
 } gpio_id_t;
 
 #define GPIO_PINS_QSTR\
+    { MP_OBJ_NEW_QSTR(MP_QSTR_PC2),      MP_OBJ_NEW_SMALL_INT(GPIO_PC2)},\
     { MP_OBJ_NEW_QSTR(MP_QSTR_PA1),      MP_OBJ_NEW_SMALL_INT(GPIO_PC4)},\
     { MP_OBJ_NEW_QSTR(MP_QSTR_PA2),      MP_OBJ_NEW_SMALL_INT(GPIO_PC5)},\
     { MP_OBJ_NEW_QSTR(MP_QSTR_PA3),      MP_OBJ_NEW_SMALL_INT(GPIO_PA3)},\
@@ -215,8 +217,8 @@ typedef enum {
     { MP_OBJ_NEW_QSTR(MP_QSTR_PA8),      MP_OBJ_NEW_SMALL_INT(GPIO_PE2)},\
     { MP_OBJ_NEW_QSTR(MP_QSTR_PB1),      MP_OBJ_NEW_SMALL_INT(GPIO_PD8)},\
     { MP_OBJ_NEW_QSTR(MP_QSTR_PB2),      MP_OBJ_NEW_SMALL_INT(GPIO_PD9)},\
-    { MP_OBJ_NEW_QSTR(MP_QSTR_PB3),      MP_OBJ_NEW_SMALL_INT(GPIO_PD12)},\
-    { MP_OBJ_NEW_QSTR(MP_QSTR_PB4),      MP_OBJ_NEW_SMALL_INT(GPIO_PD13)}
+    { MP_OBJ_NEW_QSTR(MP_QSTR_PD12),      MP_OBJ_NEW_SMALL_INT(GPIO_PD12)},\
+    { MP_OBJ_NEW_QSTR(MP_QSTR_PD13),      MP_OBJ_NEW_SMALL_INT(GPIO_PD13)}
 
 /* SCCB/I2C */
 #define SCCB_I2C                (I2C2)
@@ -228,18 +230,18 @@ typedef enum {
 #define SCCB_SDA_PIN            (GPIO_PIN_11)
 
 /* SPI */
-#define USR_SPI              (SPI4)
-#define USR_SPI_AF           (GPIO_AF5_SPI4)
-#define USR_SCLK_PIN         (GPIO_PIN_2)
-#define USR_MISO_PIN         (GPIO_PIN_5)
-#define USR_MOSI_PIN         (GPIO_PIN_6)
+#define USR_SPI              (SPI5)
+#define USR_SPI_AF           (GPIO_AF5_SPI5)
+#define USR_SCLK_PIN         (GPIO_PIN_7)
+#define USR_MISO_PIN         (GPIO_PIN_8)
+#define USR_MOSI_PIN         (GPIO_PIN_9)
 
-#define USR_SCLK_PORT        (GPIOE)
-#define USR_MISO_PORT        (GPIOE)
-#define USR_MOSI_PORT        (GPIOE)
+#define USR_SCLK_PORT        (GPIOF)
+#define USR_MISO_PORT        (GPIOF)
+#define USR_MOSI_PORT        (GPIOF)
 
-#define USR_SPI_CLK_ENABLE()    __SPI4_CLK_ENABLE()
-#define USR_SPI_CLK_DISABLE()   __SPI4_CLK_DISABLE()
+#define USR_SPI_CLK_ENABLE()    __SPI5_CLK_ENABLE()
+#define USR_SPI_CLK_DISABLE()   __SPI5_CLK_DISABLE()
 
 /* UART */
 #define UARTx                   (USART3)

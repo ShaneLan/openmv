@@ -619,7 +619,7 @@ class OMVGtk:
                     pass
         else:
             # Linux/Mac
-            serial_ports.append("/dev/openmvcam")
+            serial_ports.append("/dev/ttyACM0")
 
         return serial_ports
 
