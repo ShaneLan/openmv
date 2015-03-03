@@ -179,11 +179,11 @@ typedef enum {
 
 #else //OPENMV2
 /* LEDs */
-#define LED_PORT                (GPIOB)
-#define LED_IR_PIN              (GPIO_PIN_3)
-#define LED_RED_PIN             (GPIO_PIN_4)
-#define LED_GREEN_PIN           (GPIO_PIN_6)
-#define LED_BLUE_PIN            (GPIO_PIN_5)
+#define LED_PORT                (GPIOG)
+#define LED_IR_PIN              (GPIO_PIN_9)
+#define LED_RED_PIN             (GPIO_PIN_14)
+#define LED_GREEN_PIN           (GPIO_PIN_9)
+#define LED_BLUE_PIN            (GPIO_PIN_13)
 #define LED_ON(gpio)            (gpio.port->BSRRH = gpio.pin)
 #define LED_OFF(gpio)           (gpio.port->BSRRL = gpio.pin)
 

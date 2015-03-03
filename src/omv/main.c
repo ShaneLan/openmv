@@ -98,17 +98,17 @@ typedef struct {
 } module_t;
 
 static const module_t init_modules[] ={
-    {"sensor",  py_sensor_init},
+//    {"sensor",  py_sensor_init},
     {"led",     py_led_init},
     {"time",    py_time_init},
 //  {"wlan",    py_wlan_init},
 //  {"socket",  py_socket_init},
 //  {"select",  py_select_init},
-    {"spi",     py_spi_init},
-    {"gpio",    py_gpio_init},
-    {"uart",    py_uart_init},
+//    {"spi",     py_spi_init},
+//    {"gpio",    py_gpio_init},
+//    {"uart",    py_uart_init},
 #ifdef OPENMV2
-    {"mlx90620", py_mlx90620_init},
+//    {"mlx90620", py_mlx90620_init},
 #endif
     {NULL}
 };
