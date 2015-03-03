@@ -60,9 +60,9 @@ def write_data(c):
     spi.write(c)
     cs.high()
 
-def clear(c=0x00):
+def clear(c=0x0000):
     write_command(0x2C)
-    for i in range(120*160):
+    for i in range(240*320):
         write_data(c)
         write_data(c)
 
@@ -72,6 +72,24 @@ def write_image(image):
     rs.high()
     spi.write(image)
     cs.high()
+
+def set_curser_pos(x1,y1,x2,y2):
+	write_command(ILI9341_COLUMN_ADDR)
+	write_data(x1 >> 8)
+	write_data(x1 & 0xFF)
+	write_data(x2 >> 8)
+	write_data(x2 & 0xFF)
+	write_command(ILI9341_PAGE_ADDR)
+	write_data(y1 >> 8)
+	write_data(y1 & 0xFF)
+	write_data(y2 >> 8)
+	write_data(y2 & 0xFF)
+
+def draw_pixel(x,y,colour):
+	set_curser_pos(x, y, x, y)
+	write_command(ILI9341_GRAM)
+	write_data(colour >> 8)
+	write_data(colour & 0xFF)
 
 def init():
 	#HW reset

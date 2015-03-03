@@ -216,10 +216,6 @@ static void make_flash_fs()
     f_write(&fp, fresh_main_py, sizeof(fresh_main_py) - 1 /* don't count null terminator */, &n);
     f_close(&fp);
 
-    // create readme file
-    f_open(&fp, "README.txt", FA_WRITE | FA_CREATE_ALWAYS);
-    f_write(&fp, fresh_readme_txt, sizeof(fresh_readme_txt) - 1 /* don't count null terminator */, &n);
-    f_close(&fp);
 
     led_state(LED_RED, 0);
 }
