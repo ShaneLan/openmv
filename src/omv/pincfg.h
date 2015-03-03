@@ -307,19 +307,19 @@ typedef enum {
 #define WLAN_IRQHandler         (EXTI15_10_IRQHandler)
 #define WLAN_EXTI_LINE          (1<<11)
 
-#define WLAN_CS_PIN             (GPIO_PIN_15)
-#define WLAN_EN_PIN             (GPIO_PIN_10)
-#define WLAN_IRQ_PIN            (GPIO_PIN_11)
-#define WLAN_SCLK_PIN           (GPIO_PIN_10)
-#define WLAN_MISO_PIN           (GPIO_PIN_11)
-#define WLAN_MOSI_PIN           (GPIO_PIN_12)
+#define WLAN_CS_PIN             (GPIO_PIN_10)	/* UNUSED */
+#define WLAN_EN_PIN             (GPIO_PIN_10)	/* UNUSED */
+#define WLAN_IRQ_PIN            (GPIO_PIN_10)	/* UNUSED */
+#define WLAN_SCLK_PIN           (GPIO_PIN_10)	/* UNUSED */
+#define WLAN_MISO_PIN           (GPIO_PIN_10)	/* UNUSED */
+#define WLAN_MOSI_PIN           (GPIO_PIN_10)	/* UNUSED */
 
-#define WLAN_CS_PORT            (GPIOA)
-#define WLAN_EN_PORT            (GPIOB)
-#define WLAN_IRQ_PORT           (GPIOB)
-#define WLAN_SCLK_PORT          (GPIOC)
-#define WLAN_MISO_PORT          (GPIOC)
-#define WLAN_MOSI_PORT          (GPIOC)
+#define WLAN_CS_PORT            (GPIOF)
+#define WLAN_EN_PORT            (GPIOF)
+#define WLAN_IRQ_PORT           (GPIOF)
+#define WLAN_SCLK_PORT          (GPIOF)
+#define WLAN_MISO_PORT          (GPIOF)
+#define WLAN_MOSI_PORT          (GPIOF)
 
 #define WLAN_SPI_CLK_ENABLE()   __SPI3_CLK_ENABLE()
 #define WLAN_SPI_CLK_DISABLE()  __SPI3_CLK_DISABLE()

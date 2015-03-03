@@ -38,7 +38,7 @@
 #include "rng.h"
 #include "sensor.h"
 #include "usbdbg.h"
-#include "sdram.h"
+//#include "sdram.h"
 #include "xalloc.h"
 
 #include "py_led.h"
@@ -53,7 +53,7 @@
 #include "py_spi.h"
 #include "py/uart.h"
 
-#include "mlx90620.h"
+//#include "mlx90620.h"
 
 int errno;
 static FATFS fatfs;
@@ -243,16 +243,16 @@ int main(void)
     */
     HAL_Init();
 
-#ifdef OPENMV2
-    if (sdram_init() == false) {
-        __fatal_error("could not init sdram");
-    }
-#if 0   //SDRAM test
-    if (sdram_test() == false) {
-        __fatal_error("sdram test1 failed");
-    }
-#endif
-#endif
+//#ifdef OPENMV2
+//    if (sdram_init() == false) {
+//        __fatal_error("could not init sdram");
+//    }
+//#if 0   //SDRAM test
+//    if (sdram_test() == false) {
+//        __fatal_error("sdram test1 failed");
+//    }
+//#endif
+//#endif
 
     // basic sub-system init
     pendsv_init();
@@ -260,30 +260,29 @@ int main(void)
 
 soft_reset:
     // check if user switch held to select the reset mode
-    led_state(LED_RED, 1);
-    led_state(LED_GREEN, 1);
-    led_state(LED_BLUE, 1);
+    led_state(LED_RED, 0);
+    led_state(LED_GREEN, 0);
+    //led_state(LED_BLUE, 1);
     uint reset_mode = 1;
-
 #if MICROPY_HW_ENABLE_RTC
     rtc_init();
 #endif
 
     // GC init
     gc_init(&_heap_start, &_heap_end);
-
     // Micro Python init
     mp_init();
     mp_obj_list_init(mp_sys_path, 0);
     mp_obj_list_init(mp_sys_argv, 0);
-
+    led_state(LED_RED, 1);
     readline_init0();
     pin_init0();
     timer_init0();
-    pyb_usb_init0();
-
+    led_state(LED_RED, 1);
     xalloc_init();
     rng_init();
+    pyb_usb_init0();
+    led_state(LED_GREEN, 1);
     usbdbg_init();
 
     /* init built-in modules */
